@@ -1,0 +1,68 @@
+#!/usr/bin/env node
+
+var interpret = require('interpret');
+var v8flags = require('v8flags');
+var Liftoff = require('liftoff');
+var argv = require('minimist')(process.argv.slice(2));
+var chalk = require('chalk');
+var pkg = require('../package.json');
+
+// Initialize cli
+var cli = new Liftoff({
+  name: 'initcli',
+  extensions: interpret.jsVariants,
+  v8flags: v8flags
+});
+
+cli.launch({
+  cwd: argv.cwd,
+  configPath: argv.configfile,
+  require: argv.require,
+  completion: argv.completion
+}, invoke);
+
+function invoke(env) {
+  if (argv.version) {
+    console.info('v%s', pkg.version);
+    exit(0);
+  };
+
+  if (!env.configPath) {
+    console.error(chalk.red('configfile not found'));
+    exit(1);
+  };
+
+  if (argv._.length === 0) {
+    console.error(chalk.red('environment not found'));
+    exit(1);
+  };
+
+  if (argv._.length === 1) {
+    console.error(chalk.red('task not found'));
+  };
+
+  try {
+    initialize(argv._[0], env.configPath, argv._.slice(1));
+  } catch (e) {
+    console.error(chalk.red(e.message));
+    exit(1);
+  }
+
+  // console.log('my environment is:', env);
+  // console.log('my cli options are:', argv);
+  // console.log('my liftoff config is:', this);
+};
+
+function initialize(env, configfile, tasks) {
+  
+}
+
+function exit(code) {
+  if (process.platform === 'win32' && process.stdout.bufferSize) {
+    process.stdout.once('drain', function() {
+      process.exit(code);
+    });
+    return;
+  };
+  process.exit(code);
+}

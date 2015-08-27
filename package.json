@@ -1,0 +1,18 @@
+{
+  "name": "cli-init",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "80xer <80xer.s@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "interpret": "^0.6.5",
+    "liftoff": "^2.1.0",
+    "minimist": "^1.1.3",
+    "v8flags": "^2.0.10"
+  }
+}
