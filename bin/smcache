@@ -5,6 +5,7 @@ var v8flags = require('v8flags');
 var Liftoff = require('liftoff');
 var argv = require('minimist')(process.argv.slice(2));
 var chalk = require('chalk');
+var smcache = require('../lib/smcache');
 var pkg = require('../package.json');
 
 // Initialize cli
