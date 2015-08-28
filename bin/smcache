@@ -29,13 +29,13 @@ function invoke(config) {
     exit(1);
   };
 
-  try {
+  // try {
     runSmCache(config);
-  } catch (e) {
-    console.log(e);
-    console.error(chalk.red(e.message));
-    exit(1);
-  }
+  // } catch (e) {
+  //   console.log(e);
+  //   console.error(chalk.red(e.message));
+  //   exit(1);
+  // }
 };
 
 function runSmCache(config) {
